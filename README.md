@@ -1,21 +1,25 @@
-Generate array from generate_450d.py first
+Usage
 
-Once array is created we can now change variable in index.py to any message that will be encrypted as chipertext as rgb_vals in 450d array, and its recovered message
+    Generate the 450D array
+    Run generate_450d.py first to create the initial RGB array.
+
+    Encrypt a message
+    After the array is generated, you can set any message in index.py.
+    The system encrypts the message into the RGB values within the 450D array as ciphertext.
+
+    Recover the message
+    The encrypted RGB data can then be decoded back to recover the original message.
 
 How It Works
+Data Structure
 
-When initializing the data, we generate RGB values to create a structured array that represents color information.
+We use a multidimensional array (typically 3D), where each element corresponds to a pixel’s color, represented by three values: Red, Green, and Blue (RGB).
+RGB Value Generation
 
-    Data Structure:
-    We use an array (typically 3D) where each element corresponds to a pixel’s color, storing three values: Red, Green, and Blue (RGB).
+For each pixel position, the system generates or assigns RGB values—integers in the range 0 to 255—that define the pixel's color.
+Populating the Array
 
-    RGB Value Generation:
-    For each pixel, the system generates or assigns RGB values—integers ranging from 0 to 255—that define the pixel’s color.
+These RGB values are stored in the array at the corresponding positions, creating a full representation of the image or dataset.
+Result
 
-    Populating the Array:
-    These RGB values are stored in the array at the pixel’s position, building a full representation of the image or data.
-
-    Result:
-    The completed array serves as a digital image or dataset, encoding color information that can be processed, displayed, or transformed.
-
-This approach allows us to efficiently represent and manipulate color data for visualization or further analysis.
+The resulting array encodes color information as a digital image or dataset, which can be processed, displayed, or transformed.
