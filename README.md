@@ -14,12 +14,6 @@ How It Works
 
 
 We use a multidimensional array (typically 3D), where each element corresponds to a pixel’s color, represented by three values: Red, Green, and Blue (RGB).
-RGB Value Generation
-
 For each pixel position, the system generates or assigns RGB values—integers in the range 0 to 255—that define the pixel's color.
-Populating the Array
-
 These RGB values are stored in the array at the corresponding positions, creating a full representation of the image or dataset.
-Result
-
 The resulting array encodes color information as a digital image or dataset, which can be processed, displayed, or transformed.
