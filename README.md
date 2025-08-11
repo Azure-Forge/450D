@@ -11,7 +11,7 @@ Usage
     The encrypted RGB data can then be decoded back to recover the original message.
 
 How It Works
-Data Structure
+
 
 We use a multidimensional array (typically 3D), where each element corresponds to a pixel’s color, represented by three values: Red, Green, and Blue (RGB).
 RGB Value Generation
