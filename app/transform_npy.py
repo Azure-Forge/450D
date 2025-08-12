@@ -6,11 +6,18 @@ from cryptography.hazmat.primitives.kdf.scrypt import Scrypt
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 import numpy as np
 
-# Load password from .env
-load_dotenv()
-password = os.getenv("MY_SECRET_PASSWORD")
-if password is None:
-    password = getpass("Enter encryption password: ")
+# Shared password loader
+_PASSWORD = None
+def get_password():
+    global _PASSWORD
+    if _PASSWORD is not None:
+        return _PASSWORD
+    load_dotenv()
+    password = os.getenv("MY_SECRET_PASSWORD")
+    if not password:
+        password = getpass("Enter decryption password: ")
+    _PASSWORD = password
+    return _PASSWORD
 
 # Constants
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -46,7 +53,7 @@ def decrypt_file(enc_path, password):
     data = aesgcm.decrypt(nonce, ct, None)
     return data
 
-def encrypt_all_npy():
+    password = get_password()
     for fname in os.listdir(DATA_DIR):
         if fname.endswith('.npy'):
             npy_path = os.path.join(DATA_DIR, fname)
