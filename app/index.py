@@ -1,16 +1,9 @@
-from loader import load_all_data
-from crypto import encode_message, encrypt, decrypt, decode_message
-import numpy as np
+from crypto import encode_message, encrypt, decrypt, decode_message, load_crypto_arrays
 
-data = load_all_data()
+# Load all required arrays (decrypted in memory only when needed)
+arr, weights_r, weights_g, weights_b, rgb_norm = load_crypto_arrays()
 
-arr = data['arr']
-weights_r = data['weights_r']
-weights_g = data['weights_g']
-weights_b = data['weights_b']
-rgb_norm = data['rgb_norm']
-
-plaintext = "Hello, world!"
+plaintext = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 message_vector = encode_message(plaintext)
 
 r_vals, g_vals, b_vals = encrypt(message_vector, arr, weights_r, weights_g, weights_b, rgb_norm)

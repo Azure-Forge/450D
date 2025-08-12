@@ -1,11 +1,18 @@
 import numpy as np
 import math
+import secrets
 
 def generate_450d_array():
-    return np.random.rand(450)
+    # Generate 450 secure 64-bit unsigned integers
+    ints = np.frombuffer(secrets.token_bytes(450 * 8), dtype=np.uint64)
+    # Convert to floats in [0, 1)
+    return ints / np.float64(2**64)
 
 def create_weight_matrix(num_dims, num_pixels):
-    return np.random.rand(num_dims, num_pixels) * 0.0005  # smaller scale to reduce noise
+    # Use CSPRNG for weights too
+    ints = np.frombuffer(secrets.token_bytes(num_dims * num_pixels * 8), dtype=np.uint64)
+    floats = ints / np.float64(2**64)
+    return floats.reshape(num_dims, num_pixels) * 0.0005
 
 def stack_dimensions(arr, weights):
     return arr @ weights

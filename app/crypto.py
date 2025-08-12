@@ -1,4 +1,19 @@
+
+from loader import load_array
 import numpy as np
+
+
+def load_crypto_arrays(password=None):
+    
+    #Loads all required arrays for encryption/decryption using loader.py (decrypted in memory).
+    #Returns: arr, weights_r, weights_g, weights_b, rgb_norm
+    
+    arr = load_array('arr', password=password)
+    weights_r = load_array('weights_r', password=password)
+    weights_g = load_array('weights_g', password=password)
+    weights_b = load_array('weights_b', password=password)
+    rgb_norm = load_array('rgb_norm', password=password)
+    return arr, weights_r, weights_g, weights_b, rgb_norm
 
 def encode_message(message, length=450):
     ascii_vals = [ord(c) for c in message]
@@ -17,6 +32,7 @@ def generate_noise_mask(rgb_norm, length, amplitude=0.05):
     noise = noise_source[:length] * amplitude
     return noise
 
+
 def encrypt(message_vector, arr, weights_r, weights_g, weights_b, rgb_norm, noise_amplitude=0.05):
     combined = message_vector + arr
     noise = generate_noise_mask(rgb_norm, len(combined), noise_amplitude)
@@ -27,6 +43,7 @@ def encrypt(message_vector, arr, weights_r, weights_g, weights_b, rgb_norm, nois
     b_vals = combined_noisy @ weights_b
 
     return r_vals, g_vals, b_vals
+
 
 def decrypt(r_vals, g_vals, b_vals, weights_r, weights_g, weights_b, arr, rgb_norm, noise_amplitude=0.05):
     weights_r_inv = np.linalg.pinv(weights_r)
